@@ -1,5 +1,5 @@
 # Submarine groundwater discharge drives both direct and indirect effects on organismal and community metabolism on coral reefs
-### Danielle M. Barnas (1,2), Maya Zeff (1,3), Nyssa J. Silbiger (1,4)
+### Danielle M. Barnas (1,2), Maya Zeff (2,3), Nyssa J. Silbiger (2,4)
 1. University of Hawai’i at Mānoa, Hawai’i Institute of Marine Biology, Kaneohe, HI, United States
 2. California State University Northridge, Department of Biology, Northridge, CA, United States
 3. University of California Santa Cruz, Ecology and Evolutionary Biology, Santa Cruz, CA, United States
