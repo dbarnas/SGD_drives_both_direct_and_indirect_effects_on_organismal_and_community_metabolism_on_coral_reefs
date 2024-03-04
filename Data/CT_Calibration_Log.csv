@@ -1,0 +1,12 @@
+﻿LoggerID,treatment,date,pre_post,time_in,time_out,cond_HL,cond_uS,EC_SC,temp_HL,temp_C,sal_psu,notes
+332,Low,2/4/2023,pre,14:00,14:00,H,57413,EC,H,28.4,35.5,first deployment
+320,Low,2/4/2023,pre,14:00,14:00,H,57413,EC,H,28.4,35.5,first deployment
+349,High,2/4/2023,pre,14:00,14:00,H,57413,EC,H,28.4,35.5,first deployment
+323,High,2/4/2023,pre,14:00,14:00,H,57413,EC,H,28.4,35.5,first deployment
+332,Low,3/9/2023,pre,14:00,14:00,H,61033,EC,H,29.8,36,"value during water sampling event, daytime high tide (temp was tied to EC = 31.1 at 29.8C)"
+320,Low,3/9/2023,pre,14:00,14:00,H,61033,EC,H,29.8,36,"value during water sampling event, daytime high tide (temp was tied to EC = 31.1 at 29.8C)"
+349,High,3/9/2023,pre,14:00,14:00,H,61044,EC,H,29.3,35.9,"value during water sampling event, daytime high tide (temp tied to EC = 31.2 at 29.3 C)"
+323,High,3/9/2023,pre,14:00,14:00,H,61044,EC,H,29.3,35.9,"value during water sampling event, daytime high tide (temp tied to EC = 31.2 at 29.3 C)"
+353,Seep,2/9/2023,pre,10:30,10:30,H,60808,EC,H,32.4,35,wl: held at surface 10:32-10:34
+353,Seep,2/27/2023,pre,,,H,,EC,H,,,wl: held at surface 8:26
+353,Seep,3/21/2023,pre,,,H,,EC,H,,,

@@ -1,0 +1,15 @@
+﻿TrisCalDate,Date,Time,Site,Location,Day_Night,Tide,mV.orion,temp.orion,sal.ysi,econd.ysi,temp.ysi,TempInSitu,notes
+3/10/2023,3/9/2023,14:00,Varari,HighSGD,Day,High,-83.6,31.1,35.9,61044,31.2,31.1,wavered between 35.9 and 36.0
+3/10/2023,3/9/2023,19:30,Varari,HighSGD,Night,Low,-81.9,28.9,35.3,57347,28.6,28.9,TempInSitu column is same as temp.orion but should be taken from CT at cages and sled
+3/10/2023,3/10/2023,2:00,Varari,HighSGD,Night,High,-77.8,28.3,35.9,57516,28,28.3,
+3/10/2023,3/10/2023,8:00,Varari,HighSGD,Day,Low,-77.3,27.9,35.9,57015,27.6,27.9,
+3/10/2023,3/9/2023,14:00,Varari,LowSGD,Day,High,-84.4,31,36,61033,31.1,31,
+3/10/2023,3/9/2023,19:30,Varari,LowSGD,Night,Low,-82,29,35.9,58256,28.7,29,
+3/10/2023,3/10/2023,2:00,Varari,LowSGD,Night,High,-77.5,28.1,36.1,57799,28,28.1,
+3/10/2023,3/10/2023,8:00,Varari,LowSGD,Day,Low,-78.2,27.8,36.2,57622,27.7,27.8,
+3/10/2023,3/9/2023,14:00,Varari,Seep,Day,High,-81.8,31.6,35.3,60270,31.4,31.6,"moved sled to the real seep location at 14:00; originally put it out at 3/6/2023 15:50, water level taken at 15:40-15:42 in first location"
+3/10/2023,3/9/2023,16:30,Varari,Seep,Day,Mid,-80.8,30.5,33.2,56053,30.4,30.5,
+3/10/2023,3/9/2023,19:30,Varari,Seep,Night,Low,-43.4,27.9,23.6,39347,27.8,27.9,
+3/10/2023,3/9/2023,22:30,Varari,Seep,Night,Mid,-71.4,28.7,32.5,53067,28.4,28.7,
+3/10/2023,3/10/2023,2:00,Varari,Seep,Night,High,-77.4,28.3,35.9,57248,27.8,28.3,
+3/10/2023,3/10/2023,8:00,Varari,Seep,Day,Low,-42.9,25.3,28.8,46613,27.2,25.3,"high waves and tide still. No beach at the sgd tree, had to wait for a wave pulse to get a seep signal"

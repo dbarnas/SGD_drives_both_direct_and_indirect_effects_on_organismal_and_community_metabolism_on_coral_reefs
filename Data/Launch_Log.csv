@@ -1,0 +1,18 @@
+﻿Log_Type,Serial,Treatment,time_start,time_end,notes
+CT,CT_320,Low,2/4/2023 14:00,3/28/2023 12:00,used for analysis
+CT,CT_323,High,2/4/2023 14:00,3/28/2023 12:00,used for analysis
+CT,CT_332,Low,2/4/2023 14:00,3/28/2023 12:00,
+CT,CT_349,High,2/4/2023 14:00,3/28/2023 12:00,
+WL,,,2/17/2023 14:00,,
+CT,CT_353,Seep,2/9/2023 16:48,2/17/2023 14:12,"sled, 2 minute interval (2/17 moved for weekend)"
+WL,WL_876,Seep,2/9/2023 16:50,2/26/2023 13:44,"sled, 2 minute interval; calibration: at surface 2/9 10:32-10:34"
+CT,CT_353,Seep,2/20/2023 16:20,2/24/2023 18:40,"sled, 2 minute interval (2/17 moved for weekend)"
+WL,WL_876,Seep,2/20/2023 16:20,2/24/2023 18:40,"sled, 2 minute interval (2/17 moved for weekend)"
+CT,CT_353,Seep,2/27/2023 12:00,3/3/2023 13:02,"sled, 2 minute interval (3/3 moved for weekend"
+WL,WL_876,Seep,2/27/2023 12:00,3/3/2023 13:02,"sled, 2 minute interval; calibration: at surface 2/27 8:26, AbsPres = 101.232 kPa"
+CT,CT_353,Seep,3/6/2023 16:42,3/10/2023 8:14,3/10 moved for weekend
+WL,WL_876,Seep,3/6/2023 16:42,3/10/2023 8:14,3/10 moved for weekend
+CT,CT_353,Seep,3/13/2023 16:50,3/17/2023 17:00,3/17 removed for offload and calibration
+WL,WL_876,Seep,3/13/2023 16:50,3/17/2023 17:00,3/17 removed for offload and calibration
+CT,CT_353,Seep,3/21/2023 16:00,4/11/2023 16:30,"sled, 2 minute interval"
+WL,WL_876,Seep,3/21/2023 16:00,4/12/2023 14:00,"sled, 2 minute interval; calibration: at surface 3/20 13:10-13:14, AbsPres = 101.232 kPa"
