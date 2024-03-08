@@ -185,7 +185,7 @@ mean_nn_plot <- sum.chem %>%
         axis.title = element_text(size = 14),
         axis.text = element_text(size = 10),
         strip.text = element_text(size = 12)) +
-  labs(y = expression("Mean Nitrate+Nitrite ("*mu*"mol L-1)"),
+  labs(y = expression("Mean Nitrate+Nitrite ("*mu*"mol L"^-1*")"),
        x = "Environmental Exposure Treatment") +
   theme(axis.title.x = element_blank()) +
   scale_color_manual(values = c("#0072B2", "#D55E00"))  #"blue", "red"))
@@ -334,19 +334,19 @@ supp.chem.plot.fun <- function(param = "Nitrate+Nitrite"){
 
 suppa <- supp.chem.plot.fun(param = "Nitrate+Nitrite") +
   labs(fill = "Experimental \nTreatment",
-       y = expression("N+N ("*mu*"mol L-1)"))
+       y = expression("N+N ("*mu*"mol L"^-1*")"))
 
 suppb <- supp.chem.plot.fun(param = "Phosphate") +
   labs(fill = "Experimental \nTreatment",
-       y = expression("PO"[4]*" ("*mu*"mol L-1)"))
+       y = expression("PO"[4]*" ("*mu*"mol L"^-1*")"))
 
 suppc <- supp.chem.plot.fun(param = "Silicate") +
   labs(fill = "Experimental \nTreatment",
-       y = expression("SiO"[4]*" ("*mu*"mol L-1)"))
+       y = expression("SiO"[4]*" ("*mu*"mol L"^-1*")"))
 
 suppd <- supp.chem.plot.fun(param = "Total Alkalinity") +
   labs(fill = "Experimental \nTreatment",
-       y = expression("TA ("*mu*"mol kg-1)"))
+       y = expression("TA (mmol kg"^-1*")"))
 
 supp.plot2.full <- ((suppa + suppb) / (suppc + suppd)) + 
   plot_annotation(tag_levels = "a",
@@ -360,3 +360,4 @@ supp.plot2.full
 
 
 # ggsave(here("Output","PaperFigures","SuppFig2_nutrients.png"), supp.plot2.full, device = "png", width = 8, height = 5)
+ 
