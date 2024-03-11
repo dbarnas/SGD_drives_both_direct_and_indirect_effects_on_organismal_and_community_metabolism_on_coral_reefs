@@ -354,7 +354,7 @@ suppc <- supp.chem.plot.fun(param = "Silicate") +
 
 suppd <- supp.chem.plot.fun(param = "Total Alkalinity") +
   labs(fill = "Experimental \nTreatment",
-       y = expression("TA (mmol kg"^-1*")"))
+       y = expression("A"[T]*" ("*mu*"mol kg"^-1*")"))
 
 supp.plot2.full <- ((suppa + suppb) / (suppc + suppd)) + 
   plot_annotation(tag_levels = "a",

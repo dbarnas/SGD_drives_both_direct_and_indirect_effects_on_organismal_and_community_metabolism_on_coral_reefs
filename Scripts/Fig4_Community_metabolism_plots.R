@@ -92,10 +92,10 @@ RatesPlotFun <- function(myValue, renameVal){
 
 
 # apply function
-gpp<-RatesPlotFun(myValue = "GP", renameVal = "Gross photosynthesis") + labs(y = expression("Rate (mmol O"[2]*" g-1 hr-1)"))
-npp<-RatesPlotFun(myValue = "NP", renameVal = "Net photosynthesis")  + labs(y = expression("Rate (mmol O"[2]*" g-1 hr-1)"))
-rp<-RatesPlotFun(myValue = "R", renameVal = "Respiration")  + labs(y = expression("Rate (mmol O"[2]*" g-1 hr-1)"))
-ncp<-RatesPlotFun(myValue = "NC", renameVal = "Net calcification") + labs(y = expression("Rate ("*mu*"mol CaCO"[3]*" g-1 hr-1)"))
+gpp<-RatesPlotFun(myValue = "GP", renameVal = "Gross photosynthesis") + labs(y = expression("Rate (mmol O"[2]*" g"^-1*" hr"^-1*")"))
+npp<-RatesPlotFun(myValue = "NP", renameVal = "Net photosynthesis")  + labs(y = expression("Rate (mmol O"[2]*" g"^-1*" hr"^-1*")"))
+rp<-RatesPlotFun(myValue = "R", renameVal = "Respiration")  + labs(y = expression("Rate (mmol O"[2]*" g"^-1*" hr"^-1*")"))
+ncp<-RatesPlotFun(myValue = "NC", renameVal = "Net calcification") + labs(y = expression("Rate ("*mu*"mol CaCO"[3]*" g"^-1*" hr"^-1*")"))
 
 # patch plots
 EcoFunPlot <- (gpp + npp) / (rp + ncp) +
@@ -178,25 +178,25 @@ myContrasts %>%
 
 # apply function
 gpp<-RatesPlotFun(myValue = "GP", renameVal = "Gross photosynthesis") + 
-  labs(y = expression("Rate (mmol O"[2]*" g-1 hr-1)")) +
+  labs(y = expression("Rate (mmol O"[2]*" g"^-1*" hr"^-1*")")) +
   geom_text(aes(label=c("a", "a", "b", "b")), 
             position = position_dodge(width=1), 
             vjust=c(-2.1, -2.0,-1.5, -1.5))
 
 npp<-RatesPlotFun(myValue = "NP", renameVal = "Net photosynthesis")  + 
-  labs(y = expression("Rate (mmol O"[2]*" g-1 hr-1)")) +
+  labs(y = expression("Rate (mmol O"[2]*" g"^-1*" hr"^-1*")")) +
   geom_text(aes(label=c("a", "a", "b", "b")), 
             position = position_dodge(width=1), 
             vjust=c(-2.8, -2.1,-1.9, -1.6))
 
 rp<-RatesPlotFun(myValue = "R", renameVal = "Respiration")  + 
-  labs(y = expression("Rate (mmol O"[2]*" g-1 hr-1)")) +
+  labs(y = expression("Rate (mmol O"[2]*" g"^-1*" hr"^-1*")")) +
   geom_text(aes(label=c("a", "ab", "a", "ac")), 
             position = position_dodge(width=1), 
             vjust=c(-2.5, -3.0,-2.1, -1.8))
 
 ncp<-RatesPlotFun(myValue = "NC", renameVal = "Net calcification") + 
-  labs(y = expression("Rate ("*mu*"mol CaCO"[3]*" g-1 hr-1)")) +
+  labs(y = expression("Rate ("*mu*"mol CaCO"[3]*" g"^-1*" hr"^-1*")")) +
   geom_text(aes(label=c("a", "a", "b", "b")), 
             position = position_dodge(width=1), 
             vjust=c(-2.1, -2.1,-1.5, -1.5))
@@ -211,7 +211,7 @@ EcoFunPlot <- (gpp + npp) / (rp + ncp) +
 EcoFunPlot
 
 
-# ggsave(here("Output","PaperFigures","Fig4_EcoFunction_9.15.png"), EcoFunPlot, device = "png", width = 8, height = 5)
+# ggsave(here("Output","PaperFigures","Fig4_EcoFunction_3.11.png"), EcoFunPlot, device = "png", width = 8, height = 5)
 
 
 
