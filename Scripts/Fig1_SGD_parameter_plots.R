@@ -159,10 +159,17 @@ mean_temp_plot <- sum_ct %>%
   theme(axis.title.x = element_blank()) +
   scale_color_manual(values = c("#0072B2", "#D55E00"))  #"blue", "red"))
 
-mean_min_sal_plot + mean_sal_range_plot + mean_temp_plot
 
-
+## mean nutrients (nitrate+nitrite)
 chem <- read_csv(here("Data", "Nutrients_experimental_sites.csv"))
+
+mod.chem <- chem %>% 
+  separate(Sample_ID, into = c("Site", "Tide"), sep = "_", remove = TRUE) %>% 
+  select(Site, Tide, NN_umolL) %>% 
+  filter(Site != "Seep")
+
+ anova(lm(data = mod.chem,
+         NN_umolL ~ Site))
 
 sum.chem <- chem %>% 
   separate(Sample_ID, into = c("Site", "Tide"), sep = "_", remove = TRUE) %>% 
@@ -173,6 +180,7 @@ sum.chem <- chem %>%
             se = plotrix::std.error(NN_umolL, na.rm = TRUE)) %>% 
   mutate(Site = if_else(Site == "LowSGD", "Low SGD", "High SGD"),
          Site = factor(Site, levels = c("Low SGD", "High SGD")))
+
 
 mean_nn_plot <- sum.chem %>% 
   ggplot(aes(x = Site, y = mean, color = Site)) +
@@ -197,7 +205,7 @@ mean_nn_plot <- sum.chem %>%
 
 
 
-Fig1plotC <- (mean_min_sal_plot) +
+Fig1plotC <- (mean_sal_range_plot) +
   plot_annotation(tag_levels = list(c('c')),
                   tag_prefix = '(',
                   tag_suffix = ')') +
