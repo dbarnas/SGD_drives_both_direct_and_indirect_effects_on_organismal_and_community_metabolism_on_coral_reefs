@@ -111,7 +111,8 @@ species_rank_table <- species_rank %>%
   left_join(spfe.long) %>% 
   relocate(`SGD Exposure`, .before = Species) %>% 
   relocate(`Benthic % Cover`, .after = `Energetic Resource`) %>% 
-  arrange(desc(`SGD Exposure`), desc(`Benthic % Cover`))
+  arrange(desc(`SGD Exposure`), desc(`Benthic % Cover`)) %>% 
+  mutate(Species = if_else(Species == "Porifera 1", "Porifera unknown", Species)) # rename Poifera 1 as Porifera unknown
 
 
 formattable(species_rank_table, list(
@@ -161,5 +162,5 @@ SpeciesTable <- sp_rank_table %>%
 SpeciesTable
 
 
-# SpeciesTable %>% 
-#   as_image(file = here("Output", "Thesis_Figures_Output", "SpeciesFunctionTable.png"))
+# SpeciesTable %>%
+#   as_image(file = here("Output", "PaperFigures", "SpeciesFunctionTable.png"))
