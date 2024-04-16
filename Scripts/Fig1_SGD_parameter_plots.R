@@ -95,7 +95,7 @@ sum_ct <- ctfile %>%
          Treatment = factor(Treatment, levels = c("Low SGD", "High SGD"))) # refactor for graphical order
 
 ## average daily salinity range
-anova(lm(data = sum_ct,
+anova(lm(data = sum_ct, # significant p=0.007
          range_sal ~ Treatment))
 
 mean_sal_range_plot <- sum_ct %>% 
@@ -138,7 +138,7 @@ mean_min_sal_plot <- sum_ct %>%
 
 
 ## average temperature
-anova(lm(data = sum_ct,
+anova(lm(data = sum_ct, # significant p=2e-8
          mean_temp ~ Treatment))
 
 mean_temp_plot <- sum_ct %>% 
@@ -165,11 +165,10 @@ chem <- read_csv(here("Data", "Nutrients_experimental_sites.csv"))
 
 mod.chem <- chem %>% 
   separate(Sample_ID, into = c("Site", "Tide"), sep = "_", remove = TRUE) %>% 
-  select(Site, Tide, NN_umolL) %>% 
+  select(Site, Tide, NN_umolL, Phosphate_umolL) %>% 
   filter(Site != "Seep")
 
- anova(lm(data = mod.chem,
-         NN_umolL ~ Site))
+#### see "compare_nutrients_across_treatments.R" for nutrient stats
 
 sum.chem <- chem %>% 
   separate(Sample_ID, into = c("Site", "Tide"), sep = "_", remove = TRUE) %>% 
@@ -231,8 +230,10 @@ Fig1plotCDE_axis_title <- wrap_elements(plot_spacer()) +
     plot.tag.position = "top"
   )
 
-
-
+# quick view
+(Fig1plotC + Fig1plotD + Fig1plotE)/ # x axis subplot tags formatted in Canva
+  Fig1plotCDE_axis_title
+  
 # ggsave(here("Output", "PaperFigures", "Figure_1c.png"), Fig1plotC, device = "png", height = 3.6, width = 2.9)
 # ggsave(here("Output", "PaperFigures", "Figure_1d.png"), Fig1plotD, device = "png", height = 3.6, width = 3)
 # ggsave(here("Output", "PaperFigures", "Figure_1e.png"), Fig1plotE, device = "png", height = 3.6, width = 2.9)
