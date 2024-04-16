@@ -126,22 +126,39 @@ plot(mod2)
 qqp(mod2)
 leveneTest(mod2)
 
+mod3 <- lm(data = fullchem %>% filter(Site != "Seep"), 
+           Silicate_umolL ~ Site)
+plot(mod3)
+qqp(mod3)
+leveneTest(mod3)
 
 
 ### STANDARD DEVIATION ~ INTERACTION OF SITE AND TIDE
 
-#### Summer2021, Spring2023
+#### Nitrate+Nitrite
 anova(lm(data = fullSumChem_DN %>% filter(Parameters=="NN_umolL"), # significant: tide p=0.046 and interaction p=0.028
          Var ~ Site*Tide))
 anova(lm(data = fullSumChem_DN %>% filter(Parameters=="NN_umolL"), # significant interaction p=0.044
          SD ~ Site*Tide))
 
-#### Summer2021, Spring2023
+#### Phosphate
 anova(lm(data = fullSumChem_DN %>% filter(Parameters=="Phosphate_umolL"), # significant: tide p=0.017 and nearly interaction p=0.051
          Range ~ Site*Tide))
 anova(lm(data = fullSumChem_DN %>% filter(Parameters=="Phosphate_umolL"), # significant: tide p=0.029 and interaction p=0.049
          SD ~ Site*Tide))
-         
+
+#### Silicate
+anova(lm(data = fullSumChem_DN %>% filter(Parameters=="Silicate_umolL"), # significant: Site p=0.045
+         Mean ~ Site*Tide))
+anova(lm(data = fullSumChem_DN %>% filter(Parameters=="Silicate_umolL"), # significant: Site p=0.012, Tide p=0.026, and interaction p=0.03
+         Max ~ Site*Tide))
+anova(lm(data = fullSumChem_DN %>% filter(Parameters=="Silicate_umolL"), # significant: Site p=2e-5, Tide p=7e-5, and interaction p=0.0002
+         Range ~ Site*Tide))
+anova(lm(data = fullSumChem_DN %>% filter(Parameters=="Silicate_umolL"), # significant: Site p=0.0009, Tide p=0.0007, and interaction p=0.0014
+         Var ~ Site*Tide))
+anova(lm(data = fullSumChem_DN %>% filter(Parameters=="Silicate_umolL"), # significant: tide p=0.0002 and interaction p=0.0006
+         SD ~ Site*Tide))
+
          
          ### Standard deviation between day and night samples is significant across tides and sites 
          ### for both NN and Phosphate across Summer 2021 and Spring 2023 data
