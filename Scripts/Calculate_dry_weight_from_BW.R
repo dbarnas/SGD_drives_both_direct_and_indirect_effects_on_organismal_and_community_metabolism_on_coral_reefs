@@ -62,11 +62,26 @@ bwd <- bwd %>%
 # dry weight of object = weight in water / (1 - (Density of water / Density of object)) (Jokiel et al. 1978)
 
 
+# check if any drift in measurements pre- and post-deployment
+bwd_standard <- bw %>% 
+  select(date:Salinity) %>% 
+  separate(SpeciesID, into = c("ID", "Rep"), sep = " ", remove = FALSE) %>% 
+  filter(ID == "DI" |
+           ID == "Air" |
+           ID == "SW") %>% 
+  select(-c(AT, ET))
+# no significant difference between pre- and post-deployment
+bwd_standard %>% 
+  group_by(pre_post, ID) %>% 
+  summarise(bw_mean = mean(BW.g, na.rm = TRUE),
+            bw_se = plotrix::std.error(BW.g, na.rm = TRUE))
+
 #############################
 ### SAVE FILE
 #############################
 
 #write_csv(bwd, here("Data", "Growth", "Skeletal_Dry_Weight_Calc.csv"))
+
 
 
   
