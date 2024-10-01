@@ -53,6 +53,13 @@ ccaSA <- ccaSA %>%
 # join
 surfacearea <- rbind(coralSA, ccaSA)
 
+
+# bring in dates of bw and ww to get growth per time
+bweight.dates <- bw_weight %>% 
+  select(date, pre_post, SpeciesID)
+wweight.dates <- ww_weight %>% 
+  select(date, pre_post, SpeciesID)
+
 # calculate buoyant weights
 # normalize the change in weight to the initial weight
 bw <- bw_weight %>% 
@@ -67,19 +74,17 @@ bw <- bw_weight %>%
   pivot_wider(names_from = pre_post, values_from = dry_weight.g) %>% 
   drop_na(post) %>% # remove dead organisms
   mutate(delWeight.g = post - pre,
+         delWeight.g_biomnorm = delWeight.g/pre, # normalize to biomass
          pWeight = delWeight.g/pre*100) %>%  # calculate weight difference over soak period
-  select(SpeciesID, Sp, SpRep, AT, ET, delWeight.g, pWeight) # prep df for joining to species df
+  select(SpeciesID, Sp, SpRep, AT, ET, delWeight.g, delWeight.g_biomnorm, pWeight) # prep df for joining to species df
 
-# bring in dates of bw and ww to get growth per time
-bweight.dates <- bw_weight %>% 
-  select(date, pre_post, SpeciesID)
-wweight.dates <- ww_weight %>% 
-  select(date, pre_post, SpeciesID)
 
 # normalize weight to surface area and time
-bw <- full_join(bw, surfacearea) %>% 
-  mutate(delWeight.g_norm = delWeight.g / SA_cm2) %>% 
-  select(-SA_cm2)
+# bw <- full_join(bw, surfacearea) %>%
+#   mutate(delWeight.g_norm = delWeight.g / SA_cm2) %>%
+#   select(-SA_cm2)
+
+
 # standardize to days between measurements
 bw <- bw %>% 
   left_join(bweight.dates) %>% 
@@ -90,7 +95,7 @@ bw <- bw %>%
   mutate(DaysInSitu = post-pre) %>% 
   select(SpeciesID, DaysInSitu) %>% 
   full_join(bw) %>% 
-  mutate(delWeight.mg_norm_day = delWeight.g_norm / DaysInSitu*1000) # normalize to days in field/days between measurements
+  mutate(delWeight.mg_biomnorm_day = delWeight.g_biomnorm / DaysInSitu*1000) # normalize to days in field/days between measurements
 
 
 
@@ -98,16 +103,16 @@ bw <- bw %>%
 ww <- ww_weight %>%
   left_join(species) %>%
   left_join(afdw) %>% 
-  mutate(Dry.g = DrywTin.g - Tin.g,
-         AFDW.g = Dry.g - (AFDWwTin.g-Tin.g)) %>% 
-  select(SpeciesID, Sp, SpRep, AT, ET, pre_post, WW.g, AFDW.g) %>%
+  # mutate(Dry.g = DrywTin.g - Tin.g,
+  #        AFDW.g = Dry.g - (AFDWwTin.g-Tin.g)) %>% 
+  select(SpeciesID, Sp, SpRep, AT, ET, pre_post, WW.g) %>%
   pivot_wider(names_from = pre_post, values_from = WW.g) %>%
-  drop_na(post) %>% # for any unprocessed or lost data
+  drop_na(post) %>% # for any unprocessed or lost data # lost 39 organisms
   mutate(delWeight.g = post - pre,
+         delWeight.g_biomnorm = delWeight.g/pre, # normalize to biomass
          pWeight = delWeight.g/pre*100) %>%  # calculate weight difference over soak period
-  select(SpeciesID, Sp, SpRep, AT, ET, delWeight.g, pWeight) %>% 
-  # for now also use as normalized
-  mutate(delWeight.g_norm = delWeight.g)
+  select(SpeciesID, Sp, SpRep, AT, ET, delWeight.g, delWeight.g_biomnorm, pWeight)  
+  
 # standardize to days between measurements
 ww <- ww %>% 
   left_join(wweight.dates) %>% 
@@ -118,7 +123,7 @@ ww <- ww %>%
   mutate(DaysInSitu = post-pre) %>% 
   select(SpeciesID, DaysInSitu) %>% 
   full_join(ww) %>% 
-  mutate(delWeight.mg_norm_day = delWeight.g_norm / DaysInSitu*1000) # normalize to days in field/days between measurements
+  mutate(delWeight.mg_biomnorm_day = delWeight.g_biomnorm / DaysInSitu*1000) # normalize to days in field/days between measurements
 
 
 # calculate TO lengths
@@ -168,7 +173,7 @@ volume <- volume %>%
 species_cal <- rbind(bw, ww) %>%  # only bw until I have other species
   full_join(length) %>% 
   full_join(volume) %>% 
-  drop_na(delWeight.g)
+  drop_na(delWeight.mg_biomnorm_day)
 # write_csv(species_cal, here("Data", "RespoFiles", "SpeciesMetadata_calculated_perday.csv"))
 
 #############################
