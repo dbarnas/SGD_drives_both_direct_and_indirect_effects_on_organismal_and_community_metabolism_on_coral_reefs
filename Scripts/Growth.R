@@ -26,7 +26,7 @@ library(plotrix)
 # ww <- read_csv(here("Data", "Growth", "wet_weights_disp.csv"))
 # disp <- read_csv(here("Data", "Growth", "water_displacement.csv"))
 allspecies <- read_csv(here("Data", "RespoFiles", "SpeciesMetadata_calculated_perday.csv")) %>% 
-  drop_na(delWeight.mg_norm_day)
+  drop_na(delWeight.mg_biomnorm_day)
 
 
 
@@ -79,7 +79,7 @@ species <- species %>%
 ### SAVE FILE
 #############################
 
-write_csv(species, here("Data", "Growth", "All_Weight_pChange.csv"))
+# write_csv(species, here("Data", "Growth", "All_Weight_pChange.csv"))
 
 
 
@@ -113,11 +113,12 @@ weightPlot <- species %>%
   labs(x = "SGD Environmental Treatment",
        y = "% Weight change",
        color = "Assemblage \nTreatment")
-#### weight/cm2/day
+
+#### growth/g/day
 growthPlot <- species %>% 
   unite(Sp, AT, col = "Sp_AT", remove = F, sep = "_") %>% 
   unite(Sp, SpRep, AT, col = "SpRep_AT", remove = F, sep = "_") %>% 
-  ggplot(aes(x = ET, y = delWeight.mg_norm_day, fill = ET)) +
+  ggplot(aes(x = ET, y = delWeight.mg_biomnorm_day, fill = ET)) +
   geom_boxplot(alpha = 0.6, show.legend = FALSE) +
   geom_point(position = position_jitterdodge(),
              shape = 21,
@@ -153,12 +154,9 @@ meanspecies <- species %>%
   unite(Sp, AT, col = "Sp_AT", remove = F, sep = "_") %>% 
   unite(Sp, SpRep, AT, col = "SpRep_AT", remove = F, sep = "_") %>% 
   group_by(Sp,PartSp, ET) %>% 
-  summarise(meanVal = mean(delWeight.mg_norm_day),
-            sd = sd(delWeight.mg_norm_day),
-            se = std.error(delWeight.mg_norm_day))
-  # summarise(meanVal = mean(pWeight),
-  #           sd = sd(pWeight),
-  #           se = std.error(pWeight))
+  summarise(meanVal = mean(delWeight.mg_biomnorm_day),
+            sd = sd(delWeight.mg_biomnorm_day),
+            se = std.error(delWeight.mg_biomnorm_day))
 meanspecies %>% 
   ggplot(aes(x = ET, y = meanVal, fill = ET)) +
   geom_point(data = meanspecies,
@@ -174,7 +172,7 @@ meanspecies %>%
              shape = 21,
              size = 2,
              color = "black",
-             aes(x = ET, y = delWeight.mg_norm_day,
+             aes(x = ET, y = delWeight.mg_biomnorm_day,
              # aes(x = ET, y = pWeight,
                  fill = ET),
              show.legend = FALSE,
@@ -188,9 +186,53 @@ meanspecies %>%
         axis.text = element_text(size = 10),
         axis.title = element_text(size = 15)) +
   labs(x = "SGD Exposure Treatment",
-       y = "growth",
+       y = "Growth",
        color = "Assemblage \nTreatment")
 
-anova(lmer(data = species %>% filter(Sp == "PR"), delWeight.mg_norm_day ~ ET + (1|SpRep)))
-anova(lmer(data = species %>% filter(Sp == "VF"), delWeight.mg_norm_day ~ ET + (1|SpRep)))
-anova(lmer(data = species %>% filter(Sp == "HO"), delWeight.mg_norm_day ~ ET + (1|SpRep)))
+anova(lmer(data = species %>% filter(Sp == "PR"), delWeight.mg_biomnorm_day ~ ET + (1|SpRep)))
+anova(lmer(data = species %>% filter(Sp == "VF"), delWeight.mg_biomnorm_day ~ ET + (1|SpRep)))
+anova(lmer(data = species %>% filter(Sp == "HO"), delWeight.mg_biomnorm_day ~ ET + (1|SpRep)))
+
+
+
+
+
+
+
+
+#### visualize percent change in weight
+meanspecies_pweight <- species %>% 
+  summarise(meanVal = mean(pWeight),
+            sd = sd(pWeight),
+            se = std.error(pWeight))
+meanspecies %>% 
+  ggplot(aes(x = ET, y = meanVal, fill = ET)) +
+  geom_point(data = meanspecies,
+             shape = 21,
+             size = 2,
+             color = "black",
+             aes(fill = ET),
+             show.legend = FALSE) +
+  geom_errorbar(data = meanspecies,
+                aes(ymin = meanVal-se, ymax = meanVal+se), width = 0.2) +
+  geom_point(data = species,
+             position = position_jitterdodge(),
+             shape = 21,
+             size = 2,
+             color = "black",
+             # aes(x = ET, y = delWeight.mg_biomnorm_day,
+                 aes(x = ET, y = pWeight,
+                 fill = ET),
+             show.legend = FALSE,
+             alpha = 0.2) +
+  facet_wrap(~PartSp, scales = "free_y") +
+  theme_bw() +
+  #scale_fill_manual(values = c("black", "black")) +
+  theme(strip.background = element_rect(fill = "white"),
+        strip.text = element_text(face = "italic"),
+        panel.grid = element_blank(),
+        axis.text = element_text(size = 10),
+        axis.title = element_text(size = 15)) +
+  labs(x = "SGD Exposure Treatment",
+       y = "%Weight change",
+       color = "Assemblage \nTreatment")
