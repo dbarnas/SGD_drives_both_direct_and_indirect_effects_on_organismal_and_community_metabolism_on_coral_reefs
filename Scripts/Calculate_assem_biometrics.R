@@ -69,11 +69,29 @@ bw <- bw_weight %>%
   mutate(delWeight.g = post - pre,
          pWeight = delWeight.g/pre*100) %>%  # calculate weight difference over soak period
   select(SpeciesID, Sp, SpRep, AT, ET, delWeight.g, pWeight) # prep df for joining to species df
-# normalize weight to surface area
+
+# bring in dates of bw and ww to get growth per time
+bweight.dates <- bw_weight %>% 
+  select(date, pre_post, SpeciesID)
+wweight.dates <- ww_weight %>% 
+  select(date, pre_post, SpeciesID)
+
+# normalize weight to surface area and time
 bw <- full_join(bw, surfacearea) %>% 
   mutate(delWeight.g_norm = delWeight.g / SA_cm2) %>% 
   select(-SA_cm2)
-# look at % change in weight as well, regardless of surface area
+# standardize to days between measurements
+bw <- bw %>% 
+  left_join(bweight.dates) %>% 
+  mutate(date = mdy(date)) %>% 
+  mutate(numdays = yday(date)) %>% 
+  distinct() %>%  # two coral values weirdly duplicated
+  pivot_wider(names_from = pre_post, values_from = numdays, id_cols = SpeciesID) %>% 
+  mutate(DaysInSitu = post-pre) %>% 
+  select(SpeciesID, DaysInSitu) %>% 
+  full_join(bw) %>% 
+  mutate(delWeight.mg_norm_day = delWeight.g_norm / DaysInSitu*1000) # normalize to days in field/days between measurements
+
 
 
 # calculate wet weights
@@ -90,6 +108,18 @@ ww <- ww_weight %>%
   select(SpeciesID, Sp, SpRep, AT, ET, delWeight.g, pWeight) %>% 
   # for now also use as normalized
   mutate(delWeight.g_norm = delWeight.g)
+# standardize to days between measurements
+ww <- ww %>% 
+  left_join(wweight.dates) %>% 
+  mutate(date = mdy(date)) %>% 
+  mutate(numdays = yday(date)) %>% 
+  distinct() %>%  # two coral values weirdly duplicated
+  pivot_wider(names_from = pre_post, values_from = numdays, id_cols = SpeciesID) %>% 
+  mutate(DaysInSitu = post-pre) %>% 
+  select(SpeciesID, DaysInSitu) %>% 
+  full_join(ww) %>% 
+  mutate(delWeight.mg_norm_day = delWeight.g_norm / DaysInSitu*1000) # normalize to days in field/days between measurements
+
 
 # calculate TO lengths
 length <- ww_weight %>% 
@@ -139,7 +169,7 @@ species_cal <- rbind(bw, ww) %>%  # only bw until I have other species
   full_join(length) %>% 
   full_join(volume) %>% 
   drop_na(delWeight.g)
-#write_csv(species_cal, here("Data", "RespoFiles", "SpeciesMetadata_calculated.csv"))
+# write_csv(species_cal, here("Data", "RespoFiles", "SpeciesMetadata_calculated_perday.csv"))
 
 #############################
 ##### Assemblage Metrics #####
