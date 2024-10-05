@@ -13,3 +13,5 @@ Coral reefs experience numerous environmental gradients affecting organismal phy
 Processed and raw data can be found [here](Data/).  
 Scripts for data processing, analysis, and figures can be found [here](Scripts/).  
 Output figures and tables can be found [here](/Output).
+
+[![DOI](https://zenodo.org/badge/767145233.svg)](https://doi.org/10.5281/zenodo.13892968)
