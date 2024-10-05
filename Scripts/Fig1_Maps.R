@@ -11,7 +11,7 @@ library(ggmap)
 library(maptools)
 #devtools::install_github('oswaldosantos/ggsn')
 library(ggsn) # removed from CRAN. Use install link above
-
+library(patchwork)
 
 
 ##########################################################
@@ -41,7 +41,7 @@ LocationGPS <- meta %>%
 
 
 # Moorea Base Map
-MooreaMap<-get_map('Moorea', maptype = 'satellite', zoom = 12)
+MooreaMap <- get_map('Moorea', maptype = 'satellite', zoom = 12)
 
 
 MooreaMapPlot <- ggmap(MooreaMap) + # base map
@@ -52,13 +52,23 @@ MooreaMapPlot <- ggmap(MooreaMap) + # base map
   
   geom_text(data = LocationGPS, aes(label = Location), color = "white", hjust = -0.4, size = 8) + # adds Location names to the right of the boxes
   
+  geom_rect(aes(xmin = -149.842, xmax = -149.724,
+                ymin = -17.638, ymax = -17.62), fill = "white") +
+  
+  ggsn::scalebar(x.min = -149.9, x.max = -149.74,
+                 y.min = -17.625, y.max = -17.45, 
+                 transform = TRUE, model = 'WGS84',
+                 dist = 5, dist_unit = "km",
+                 location = "bottomright",
+                 st.dist = 0.04) +
+    
   theme(axis.title.x = element_blank(),
         axis.title.y = element_blank(),
+        #axis.title = element_text(size = 16),
         axis.text = element_text(size = 13))
 
 
 MooreaMapPlot
-
 
 
 ##########################################################
@@ -124,8 +134,8 @@ VmapSites <- ggmap(VarariBaseMap) +
             size = 4) +
   
   theme(axis.text = element_text(size = 13),
-        #axis.title = element_text(size = 16)
-        axis.title = element_blank()) +
+        axis.title = element_text(size = 16),
+        axis.title.y = element_blank()) +
   # add arrow outline
   geom_segment(aes(xend = -149.8999, yend = -17.5404, x = -149.8991, y = -17.5409),
                arrow = arrow(length = unit(0.5, "cm")),
@@ -171,4 +181,5 @@ Fig1plotB <- (VmapSites) +
 Fig1plotAB <- Fig1plotA + Fig1plotB
 
 
-# ggsave(here("Output", "PaperFigures", "Figure_1ab.png"), Fig1plotAB, device = "png", height = 5, width = 9)
+ggsave(here("Output", "PaperFigures", "Figure_1ab.png"), Fig1plotAB, device = "png", height = 5, width = 9)
+

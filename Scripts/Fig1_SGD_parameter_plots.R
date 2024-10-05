@@ -101,6 +101,7 @@ anova(lm(data = sum_ct, # significant p=0.007
 mean_sal_range_plot <- sum_ct %>% 
   group_by(Treatment) %>% 
   summarise(mean_range = mean(range_sal, na.rm = TRUE),
+            # sd = sd(range_sal, na.rm = TRUE),
             se = plotrix::std.error(range_sal, na.rm = TRUE)) %>% 
   ggplot(aes(x = Treatment, y = mean_range, color = Treatment)) +
   geom_point(size = 3) +
@@ -121,6 +122,7 @@ mean_sal_range_plot <- sum_ct %>%
 mean_min_sal_plot <- sum_ct %>% 
   group_by(Treatment) %>% 
   summarise(mean_min_sal = mean(min_sal, na.rm = TRUE),
+            # sd = sd(min_sal, na.rm = TRUE),
             se = plotrix::std.error(min_sal, na.rm = TRUE)) %>% 
   ggplot(aes(x = Treatment, y = mean_min_sal, color = Treatment)) +
   geom_point(size = 3) +
@@ -144,6 +146,7 @@ anova(lm(data = sum_ct, # significant p=2e-8
 mean_temp_plot <- sum_ct %>% 
   group_by(Treatment) %>% 
   summarise(mean = mean(mean_temp, na.rm = TRUE),
+            # sd = sd(mean_temp, na.rm = TRUE),
             se = plotrix::std.error(mean_temp, na.rm = TRUE)) %>% 
   ggplot(aes(x = Treatment, y = mean, color = Treatment)) +
   geom_point(size = 3) +
@@ -176,6 +179,7 @@ sum.chem <- chem %>%
   filter(Site != "Seep") %>% 
   group_by(Site) %>% 
   summarise(mean = mean(NN_umolL, na.rm = TRUE),
+            # sd = sd(NN_umolL, na.rm = TRUE),
             se = plotrix::std.error(NN_umolL, na.rm = TRUE)) %>% 
   mutate(Site = if_else(Site == "LowSGD", "Low SGD", "High SGD"),
          Site = factor(Site, levels = c("Low SGD", "High SGD")))
@@ -233,10 +237,10 @@ Fig1plotCDE_axis_title <- wrap_elements(plot_spacer()) +
 # quick view
 (Fig1plotC + Fig1plotD + Fig1plotE)/ # x axis subplot tags formatted in Canva
   Fig1plotCDE_axis_title
-  
-# ggsave(here("Output", "PaperFigures", "Figure_1c.png"), Fig1plotC, device = "png", height = 3.6, width = 2.9)
-# ggsave(here("Output", "PaperFigures", "Figure_1d.png"), Fig1plotD, device = "png", height = 3.6, width = 3)
-# ggsave(here("Output", "PaperFigures", "Figure_1e.png"), Fig1plotE, device = "png", height = 3.6, width = 2.9)
+
+ggsave(here("Output", "PaperFigures", "Figure_1c.png"), Fig1plotC, device = "png", height = 3.6, width = 2.9)
+ggsave(here("Output", "PaperFigures", "Figure_1d.png"), Fig1plotD, device = "png", height = 3.6, width = 3)
+ggsave(here("Output", "PaperFigures", "Figure_1e.png"), Fig1plotE, device = "png", height = 3.6, width = 2.9)
 # ggsave(here("Output", "PaperFigures", "Figure_1cde_axis_title.png"), Fig1plotCDE_axis_title, device = "png", height = 4, width = 9)
 
 
@@ -289,6 +293,7 @@ sum.chem <- chem %>%
   pivot_longer(cols = Phosphate:`Total Alkalinity`, names_to = "Parameters", values_to = "Values") %>% 
   group_by(Site, Parameters) %>% 
   summarise(mean = mean(Values, na.rm = TRUE),
+            # sd = sd(Values, na.rm = TRUE),
             se = plotrix::std.error(Values, na.rm = TRUE)) %>% 
   ungroup()
 
@@ -368,5 +373,5 @@ supp.plot2.full <- ((suppa + suppb) / (suppc + suppd)) +
 supp.plot2.full
 
 
-# ggsave(here("Output","PaperFigures","SuppFig2_nutrients.png"), supp.plot2.full, device = "png", width = 8, height = 5)
+ggsave(here("Output","PaperFigures","SuppFig2_nutrients.png"), supp.plot2.full, device = "png", width = 8, height = 5)
  
