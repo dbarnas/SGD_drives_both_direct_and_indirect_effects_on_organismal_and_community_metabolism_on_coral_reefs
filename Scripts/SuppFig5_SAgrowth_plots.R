@@ -1,11 +1,9 @@
-#### Figure 3 & Supplemental Table 1: Mean percent change in weight with 
-####            standard error and raw associated data points for species pairs 
-####            in two SGD exposure treatments.
+#### Supplemental Figure 5 and Table 4: surface area-normalized growth
 #### Created by Danielle Barnas
 
 
 ##########################################################
-### Figure 3
+### Supplemental Figure 5
 ##########################################################
 
 #############################
@@ -28,16 +26,20 @@ library(kableExtra)
 ### READ IN DATA
 #############################
 
-species <- read_csv(here("Data", "Growth", "All_Weight_pChange.csv"))
-meta <- read_csv(here("Data","RespoFiles","SpeciesMetadata.csv"))
+species <- read_csv(here("Data","RespoFiles","SpeciesMetadata_calculated_perday.csv"))
+meta <- read_csv(here("Data","RespoFiles","SpeciesMetadata.csv")) %>% select(SpeciesID, FullSp)
+
 
 
 
 #############################
 ### PROCESS SPECIES NAMES
 #############################
-meta <- meta %>% 
-  select(FullSp, Sp) %>% 
+species <- species %>% 
+  select(-delTopLength.cm, -pLength, -delVolume.ml, -pVolume)
+
+meta <- species %>% 
+  left_join(meta) %>% 
   distinct() %>%
   mutate(Sp = if_else(Sp == "ME", "MG", 
                       if_else(Sp == "GS", "Por1", Sp))) %>% 
@@ -60,14 +62,28 @@ species <- species %>%
                                                                           if_else(Sp == "VF", "V. fastigiata", ""))))))))) %>% 
   mutate(ET = factor(ET, levels = c("LOW", "HIGH")))
 
-meanspecies <- species %>% 
+species <- species %>% 
   unite(Sp, AT, col = "Sp_AT", remove = F, sep = "_") %>% 
   unite(Sp, SpRep, AT, col = "SpRep_AT", remove = F, sep = "_") %>% 
-  group_by(Sp,PartSp, ET) %>% 
-  summarise(meanVal = mean(delWeight.mg_biomnorm_day),
-            sd = sd(delWeight.mg_biomnorm_day),
-            se = plotrix::std.error(delWeight.mg_biomnorm_day)) %>% 
-  mutate(ET = factor(ET, levels = c("LOW", "HIGH")))
+  group_by(Sp, PartSp, ET) %>% 
+  # normalize to days between measurements
+  mutate(delWeight.g_day = delWeight.g/DaysInSitu)
+
+# taxon-specific normalization metric
+sa.sp <- c("PR", "PA", "MG", "LK")
+
+species <- species %>% 
+  filter(Sp %in% sa.sp) %>% 
+  relocate(delWeight.g_day, .after = delWeight.g) %>% 
+  mutate(growth.mg.cm2.d = delWeight.g_day/SA_cm2*1000) %>% 
+  select(SpeciesID:ET, FullSp:growth.mg.cm2.d)
+      
+meanspecies <- species %>% 
+  summarise(meanVal = mean(growth.mg.cm2.d, na.rm = TRUE), # already grouped by Sp and ET
+            sd = sd(growth.mg.cm2.d, na.rm = TRUE),
+            se = plotrix::std.error(growth.mg.cm2.d, na.rm = TRUE)) %>% 
+  mutate(ET = factor(ET, levels = c("LOW", "HIGH"))) %>% 
+  drop_na(meanVal)
 
 
 
@@ -95,7 +111,7 @@ weightPlotFun <- function(myfilter){
                shape = 21,
                size = 2,
                color = "black",
-               aes(x = ET, y = delWeight.mg_biomnorm_day,
+               aes(x = ET, y = growth.mg.cm2.d,
                    fill = ET),
                show.legend = FALSE,
                alpha = 0.1) +
@@ -109,25 +125,20 @@ weightPlotFun <- function(myfilter){
           axis.title = element_blank(),
           legend.position = "none") +
     labs(#x = "SGD Exposure Treatment",
-      #y = "Growth (mg g-1 day-1)",
       color = "Assemblage \nTreatment")
   return(weightPlot)
 }
 a<-weightPlotFun("PA") + theme(legend.position = "right")
 b<-weightPlotFun("PR")
 c<-weightPlotFun("MG")
-d<-weightPlotFun("VF") #+ theme(axis.title.y = element_text(size = 14)) + labs(y=expression("% "*Delta*" Weight"))
-e<-weightPlotFun("HO")
-f<-weightPlotFun("LK")
-g<-weightPlotFun("Por1")
-h<-weightPlotFun("DN") #+ theme(axis.title.x = element_text(size = 14)) + labs(x = "SGD Exposure Treatment")
+d<-weightPlotFun("LK")
 
 layout <- '
-ABCD
-EFGH
+AB
+CD
 '
 
-weightPatch <- a + b + c + d + e + f + g + h +
+weightPatch <- a + b + c + d +
   plot_annotation(tag_levels = "a",
                   tag_prefix = "(",
                   tag_suffix = ")") +
@@ -137,8 +148,7 @@ weightPatch <- a + b + c + d + e + f + g + h +
 
 
 weightPatch.2 <- wrap_elements(weightPatch) +
-  # labs(tag = expression("% "*Delta*" Weight")) +
-  labs(tag = expression("Growth (mg g"^"-1"*"day"^"-1"*")")) +
+  labs(tag = expression("Growth (mg cm"^"-2"*"day"^"-1"*")")) +
   theme(
     plot.tag = element_text(size = rel(1.3), angle = 90),
     plot.tag.position = "left"
@@ -152,14 +162,14 @@ wrap_elements(weightPatch.2) +
   )
 weightPatch.2
 
-# ggsave(here("Output","PaperFigures","Fig3_Weight_Change_long.png"), weightPatch.2, width = 8, height = 5)
+# ggsave(here("Output","Thesis_Figures_Output","SuppFig5_Weight_Change_long.png"), weightPatch.2, width = 8, height = 5)
 
 
 
 
 ##########################################################
-### Supplemental Table 1: Type III Analysis of Variance table displaying changes in 
-### growth of species pairs in either high or low SGD exposure (ET).
+### Supplemental Table 1: Type III Analysis of Variance table displaying percent 
+### change in weight of species pairs in either high or low SGD exposure (ET).
 ##########################################################
 
 
@@ -171,7 +181,8 @@ weightPatch.2
 modelData <- species
 
 # renumber pairs for 1:26 as necessary
-modelData <- species %>% 
+modelData <- species %>%
+  ungroup() %>% 
   select(SpeciesID:ET) %>% 
   count(AT, Sp,SpRep) %>%
   unite(Sp, SpRep, col = "UniqueSp", sep = "_", remove = F) %>% 
@@ -189,7 +200,7 @@ mySource <- as_tibble(c("~ ET + (1|Pairs)")) %>% rename(Source = value)
 
 modTib <- tibble()
 
-for(i in 1:8){
+for(i in 1:4){
   mySp <- unique(modelData$Sp)[i] # get species name
   
   moddata <- modelData %>% filter(Sp == mySp) # get individual species data only
@@ -201,7 +212,7 @@ for(i in 1:8){
   # if(spcount > 26){
   #   mymodel <- lmer(data = moddata, pWeight ~ ET + (1|AT:SpRep)) # species in both assemblage types
   # } else {
-  mymodel <- lmer(data = moddata, delWeight.mg_biomnorm_day ~ ET + (1|newRep))
+  mymodel <- lmer(data = moddata, growth.mg.cm2.d ~ ET + (1|newRep))
   # }
   
   mod <- Growth_Anova_Table %>% 
@@ -219,13 +230,13 @@ for(i in 1:8){
 }
 
 
-
+sp.names <- meta %>% select(Sp, FullSp) %>% distinct()
 
 fullmod <- modTib %>% 
   # use full species names
   rename(Sp = Species) %>% 
-  left_join(meta) %>% 
-  mutate(Sp = factor(Sp, levels = c("PA", "PR", "MG", "VF", "HO", "LK", "Por1", "DN"))) %>% 
+  left_join(sp.names) %>% 
+  mutate(Sp = factor(Sp, levels = c("PA", "PR", "MG", "LK"))) %>% 
   arrange(Sp) %>%
   relocate(FullSp, .before = Source) %>% 
   
@@ -251,10 +262,10 @@ fullmod <- modTib %>%
   mutate(Fvalue = if_else(is.na(Fvalue), "-", as.character(Fvalue))) %>% 
   mutate(p = if_else(is.na(p), "-", as.character(p))) %>% 
   rename('F' = Fvalue) %>% 
-  mutate(star = if_else(Sp == "PR", "**",
-                        if_else(Sp == "VF", "***",
-                                if_else(Sp == "HO", "*", "")))) %>% 
-  unite(p, star, sep = " ", col = "p") %>% 
+  mutate(star = if_else(Sp == "PR", "**", "")) %>% 
+  #                       if_else(Sp == "VF", "***",
+  #                               if_else(Sp == "HO", "*", "")))) %>% 
+  unite(p, star, sep = " ", col = "p") %>%
   select(-Sp)
 
 
@@ -263,7 +274,7 @@ fullmod <- modTib %>%
 #############################
 
 GrowthTable <- fullmod %>%
-  kbl(align = c("l","r","r","r","r", "c", "l")) %>% 
+  kbl(align = c("l","r","r","r","r", "c", "l")) %>%
   #kbl() %>% 
   kable_classic(html_font = "Times New Roman",
                 font_size = 20) %>% 
@@ -271,8 +282,3 @@ GrowthTable <- fullmod %>%
   column_spec(1, italic = TRUE)
 
 GrowthTable
-
-# GrowthTable %>%
-#   as_image(file = here("Output", "GrowthAnovaTable_biomnorm.png"))
-
-

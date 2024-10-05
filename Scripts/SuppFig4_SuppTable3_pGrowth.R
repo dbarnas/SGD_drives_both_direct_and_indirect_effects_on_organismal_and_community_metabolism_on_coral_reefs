@@ -1,11 +1,9 @@
-#### Figure 3 & Supplemental Table 1: Mean percent change in weight with 
-####            standard error and raw associated data points for species pairs 
-####            in two SGD exposure treatments.
+#### Supplemental Figure 4 and Table 3: Percent change in weight
 #### Created by Danielle Barnas
 
 
 ##########################################################
-### Figure 3
+### Supplemental Figure 4
 ##########################################################
 
 #############################
@@ -64,9 +62,9 @@ meanspecies <- species %>%
   unite(Sp, AT, col = "Sp_AT", remove = F, sep = "_") %>% 
   unite(Sp, SpRep, AT, col = "SpRep_AT", remove = F, sep = "_") %>% 
   group_by(Sp,PartSp, ET) %>% 
-  summarise(meanVal = mean(delWeight.mg_biomnorm_day),
-            sd = sd(delWeight.mg_biomnorm_day),
-            se = plotrix::std.error(delWeight.mg_biomnorm_day)) %>% 
+  summarise(meanVal = mean(pWeight),
+            sd = sd(pWeight),
+            se = plotrix::std.error(pWeight)) %>% 
   mutate(ET = factor(ET, levels = c("LOW", "HIGH")))
 
 
@@ -95,7 +93,7 @@ weightPlotFun <- function(myfilter){
                shape = 21,
                size = 2,
                color = "black",
-               aes(x = ET, y = delWeight.mg_biomnorm_day,
+               aes(x = ET, y = pWeight,
                    fill = ET),
                show.legend = FALSE,
                alpha = 0.1) +
@@ -109,7 +107,7 @@ weightPlotFun <- function(myfilter){
           axis.title = element_blank(),
           legend.position = "none") +
     labs(#x = "SGD Exposure Treatment",
-      #y = "Growth (mg g-1 day-1)",
+      #y = "% Weight change",
       color = "Assemblage \nTreatment")
   return(weightPlot)
 }
@@ -137,8 +135,7 @@ weightPatch <- a + b + c + d + e + f + g + h +
 
 
 weightPatch.2 <- wrap_elements(weightPatch) +
-  # labs(tag = expression("% "*Delta*" Weight")) +
-  labs(tag = expression("Growth (mg g"^"-1"*"day"^"-1"*")")) +
+  labs(tag = expression("% "*Delta*" Weight")) +
   theme(
     plot.tag = element_text(size = rel(1.3), angle = 90),
     plot.tag.position = "left"
@@ -152,14 +149,14 @@ wrap_elements(weightPatch.2) +
   )
 weightPatch.2
 
-# ggsave(here("Output","PaperFigures","Fig3_Weight_Change_long.png"), weightPatch.2, width = 8, height = 5)
+# ggsave(here("Output","Thesis_Figures_Output","SuppFig4_Weight_Change_long.png"), weightPatch.2, width = 8, height = 5)
 
 
 
 
 ##########################################################
-### Supplemental Table 1: Type III Analysis of Variance table displaying changes in 
-### growth of species pairs in either high or low SGD exposure (ET).
+### Supplemental Table 1: Type III Analysis of Variance table displaying percent 
+### change in weight of species pairs in either high or low SGD exposure (ET).
 ##########################################################
 
 
@@ -201,7 +198,7 @@ for(i in 1:8){
   # if(spcount > 26){
   #   mymodel <- lmer(data = moddata, pWeight ~ ET + (1|AT:SpRep)) # species in both assemblage types
   # } else {
-  mymodel <- lmer(data = moddata, delWeight.mg_biomnorm_day ~ ET + (1|newRep))
+  mymodel <- lmer(data = moddata, pWeight ~ ET + (1|newRep))
   # }
   
   mod <- Growth_Anova_Table %>% 
@@ -217,7 +214,6 @@ for(i in 1:8){
   modTib <- modTib %>% 
     rbind(mod)
 }
-
 
 
 
@@ -263,7 +259,7 @@ fullmod <- modTib %>%
 #############################
 
 GrowthTable <- fullmod %>%
-  kbl(align = c("l","r","r","r","r", "c", "l")) %>% 
+  kbl(align = c("l","r","r","r","r", "c", "l")) %>%
   #kbl() %>% 
   kable_classic(html_font = "Times New Roman",
                 font_size = 20) %>% 
@@ -271,8 +267,3 @@ GrowthTable <- fullmod %>%
   column_spec(1, italic = TRUE)
 
 GrowthTable
-
-# GrowthTable %>%
-#   as_image(file = here("Output", "GrowthAnovaTable_biomnorm.png"))
-
-

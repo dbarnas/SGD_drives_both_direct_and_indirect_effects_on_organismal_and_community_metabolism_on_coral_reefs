@@ -76,7 +76,8 @@ bw <- bw_weight %>%
   mutate(delWeight.g = post - pre,
          delWeight.g_biomnorm = delWeight.g/pre, # normalize to biomass
          pWeight = delWeight.g/pre*100) %>%  # calculate weight difference over soak period
-  select(SpeciesID, Sp, SpRep, AT, ET, delWeight.g, delWeight.g_biomnorm, pWeight) # prep df for joining to species df
+  select(SpeciesID, Sp, SpRep, AT, ET, delWeight.g, delWeight.g_biomnorm, pWeight) %>%  # prep df for joining to species df
+  filter(SpeciesID != "PR3HL") # mis-weighed
 
 
 # normalize weight to surface area and time
@@ -172,8 +173,10 @@ volume <- volume %>%
 # write csv with calculated values
 species_cal <- rbind(bw, ww) %>%  # only bw until I have other species
   full_join(length) %>% 
-  full_join(volume) %>% 
-  drop_na(delWeight.mg_biomnorm_day)
+  full_join(volume) %>%
+  drop_na(delWeight.g) %>% 
+  left_join(surfacearea)
+  
 # write_csv(species_cal, here("Data", "RespoFiles", "SpeciesMetadata_calculated_perday.csv"))
 
 #############################

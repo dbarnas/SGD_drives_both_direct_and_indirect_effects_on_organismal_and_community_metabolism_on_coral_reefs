@@ -55,7 +55,7 @@ to_anti_pair <- species %>%
   select(Sp,SpRep, AT)
 species <- species %>% 
   anti_join(to_anti_pair) %>% 
-  filter(SpeciesID != "PR3HL") # must have mis-weighed because no growth shown.
+  filter(SpeciesID != "PR3HL") # mis-weighed
 
 
 #### to use even unpaired orgs (as random effects)
@@ -142,7 +142,7 @@ growthPlot <- species %>%
 
 species <- species %>% 
   mutate(PartSp = if_else(Sp == "DN", "D. nummiforme",
-                  if_else(Sp == "GS", "Porifera unk", 
+                  if_else(Sp == "GS", "Porifera unkown", 
                   if_else(Sp == "HO", "H. opuntia", 
                   if_else(Sp == "LK", "L. kotschyanum",
                   if_else(Sp == "ME", "M. grisea",
