@@ -163,4 +163,4 @@ SpeciesTable
 
 
 # SpeciesTable %>%
-#   as_image(file = here("Output", "PaperFigures", "SpeciesFunctionTable.png"))
+#   as_image(file = here("Output", "PaperFigures", "Table1.png"))
