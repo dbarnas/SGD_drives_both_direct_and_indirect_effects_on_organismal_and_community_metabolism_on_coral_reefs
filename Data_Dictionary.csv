@@ -1,0 +1,35 @@
+﻿Folder Path,File Name,Description,Cleaned from Script,Used in Script
+Data,CT_Calibration_Log.csv,Details of conductivity-temperature logger calibrations before field deployment,,CT_Processing.R
+Data,Site_Metadata.csv,Locational information about the the experimental sites,,Fig1_Maps.R
+Data,Launch_Log.csv,"Details of CTD logger deployments, when and where loggers recorded in situ",,CT_Processing.R
+Data,Nutrients_experimental_sites.csv,Nutrients from experimental sites during deployment,,Fig1_SuppFig3_SGD_parameter_plots.R
+Data,pHProbe_Data_calculated.csv,Calculated total pH at each experimental site,pHProbeDataProcess.R,
+Data,Tris_Calibration_3_10_2023.csv,pH probe calibration data using a tris buffer solution,,pHProbeDataProcess.R
+Data,Water_Sample_rawTA.csv,Total alkalinity measured from discrete water samples at experimental locations,,Fig1_SuppFig3_SGD_parameter_plots.R
+Data,Water_Sampling.csv,Measurements taken at time of discrete water sampling for each experimental locations,,pHProbeDataProcess.R
+Data/FunDiv,Species_Abundances_wide.csv,Percent cover of benthic species along the SGD gradient at the experimental site,,Tab1_Species_Table.R
+Data/FunDiv,Species_Composition_2022.csv,Raw counts of species along the SGD gradient,,Tab1_Species_Table.R
+Data/FunDiv,Species_FE.csv,Functional entity per taxa,,Tab1_Species_Table.R
+Data/Growth,All_Weight_pChange.csv,Change in weight per organism and normalized to biomass and time,Growth.R,Fig3_Growth_plots.R
+Data/Growth,buoyant_weights.csv,Raw buoyant weight data,,Calculate_dry_weight_from_BW.R
+Data/Growth,foil_SA_CCA.csv,CCA surface area,,Calculate_assem_biometrics.R
+Data/Growth,foil_SA_curve.csv,Creating the standard curve for CCA; foil-wrapping method,,SuppFig4_SA_plots.R
+Data/Growth,Skeletal_Dry_Weight_Calc.csv,Calculated dry weights of calcifying organisms,Calculate_dry_weight_from_BW.R,Calculate_assem_biometrics.R
+Data/Growth,wax_dip_corals.csv,Coral sruface area,,Calculate_assem_biometrics.R
+Data/Growth,wax_dip_curve.csv,Creating the standard curve for coral; wax-dipping method,,SuppFig4_SA_plots.R
+Data/Growth,wet_weights_disp.csv,Wet weights of organisms,,Calculate_assem_biometrics.R
+Data/RespoFiles,AFDW.csv,Dry weight and AFDW measurements,,Calculate_assem_biometrics.R
+Data/RespoFiles,All_EcoMet_Rates.csv,Metabolic rates of assemblages,NEC_Assemblage.R,Fig4_Community_metabolism_plots.R
+Data/RespoFiles,AssemblageMetadata_calc.csv,Volume and AFDW of assemblages,Calculate_assem_biometrics.R,NEC_Assemblage.R; PR_Assemblage.R
+Data/RespoFiles,CleanO2/,"Cleaned oxygen and temperature values recorded for assemblages in enclosed chambers, excluding appropriate outliers",Clean_O2_data.R,PR_Assemblage.R
+Data/RespoFiles,RawO2/,Raw oxygen and temperature values recorded for assemblages in enclosed chambers,,Clean_O2_data.R
+Data/RespoFiles,RawTA_2023.csv,Respirometry total alkalinity and salinity,,NEC_Assemblage.R
+Data/RespoFiles,Respo_R.csv,Calculated rates of oxygen evolution during respirometry,PR_Assemblage.R,
+Data/RespoFiles,Respo_RNormalized_AllRates.csv,Background activity-corrected metabolic rates,PR_Assemblage.R,NEC_Assemblage.R
+Data/RespoFiles,RespoMetadata.csv,"Date, start and stop times, and relevant comments related to each respirometry run and chamber.",,NEC_Assemblage.R; PR_Assemblage.R
+Data/RespoFiles,RespoVolume.csv,Organism volume displacement after respirometry,,Calculate_assem_biometrics.R; NEC_Assemblage.R
+Data/RespoFiles,SpeciesMetadata.csv,Organism treatment metadata,,Calculate_assem_biometrics.R; Fig3_Growth_plots.R; SuppFig1_SuppTab1_SAgrowth_plots.R
+Data/RespoFiles,SpeciesMetadata_calculated_perday.csv,Change in weight per organism and normalized to biomass and time,Calculate_assem_biometrics.R,Growth.R; SuppFig1_SuppTab1_SAgrowth_plots.R
+Data/CTDfiles/Treatment_CTDs/QC_files,Full_CT_2023-09-11.csv,Clean CT logger data during deployment,CT_Processing.R,SuppFig2_CTD_compare_site.R; Fig1_SuppFig3_SGD_parameter_plots.R
+Data/CTDfiles/Treatment_CTDs/Spring2023,Cond/,Raw conductivity-temperature measurements per logger deployment at each environmental treatment site,,CT_Processing.R
+Data/CTDfiles/Treatment_CTDs/Spring202,Depth/,Depth measurements per logger deployment at each environmental treatment site,,SuppFig2_CTD_compare_site.R

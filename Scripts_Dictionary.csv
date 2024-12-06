@@ -1,0 +1,17 @@
+﻿Script,Output Files,Description
+Calculate_dry_weight_from_BW.R,Data/Growth/Skeletal_Dry_Weight_Calc.csv,
+Calculate_assem_biometrics.R,Data/RespoFiles/AssemblageMetadata_calc.csv; Data/RespoFiles/SpeciesMetadata_calculated_perday.csv,
+Clean_O2_data.R,Data/RespoFiles/CleanO2/,
+CT_Processing.R,Data/CTDfiles/Treatment_CTDs/QC_files/Full_CT_2023-09-11.csv,
+Growth.R,Data/Growth/All_Weight_pChange.csv,Calculate change in weight per species and save clean growth file
+NEC_Assemblage.R,Data/RespoFiles/All_EcoMet_Rates.csv,"Calculate normalized net ecosystem calcification rates, join all metabolic rates, and visualize rates per treatment. Run statistical tests on metabolic rates per treatment"
+pHProbeDataProcess.R,Data/pHProbe_Data_calculated.csv,
+PR_Assemblage.R,Data/RespoFiles/Respo_R.csv; Data/RespoFiles/Respo_RNormalized_AllRates.csv,
+Fig1_Maps.R,Output/Figure_1ab.png,
+Fig1_SuppFig3_SGD_parameter_plots.R,Output/Figure_1c.png; Output/Figure_1d.png; Output/Figure_1e.png; Output/SuppFig3.png,Visualize and run statistics on biogeochemical parameters at each treatment site. Output Figure 1 and nutrients Supplemental Figure
+Fig3_SuppTab2_Growth_plots.R,Output/Figure3.png; Output/SuppTable2.png,check table file name
+Fig4_SuppTab3_Community_metabolism_plots.R,Output/Figure4.png; Output/SuppTable3.png,check plot and table  file names
+SuppFig1_SuppTab1_SAgrowth_plots.R,Output/SuppFig1.png; Output/SuppTable1.png,
+SuppFig2_CTD_compare_site.R,Output/SuppFig2.png,Supplemental Figure 1
+SuppFig4_SA_plots.R,Output/SuppFig4.png,
+Tab1_Species_Table.R,Output/Table1.png,

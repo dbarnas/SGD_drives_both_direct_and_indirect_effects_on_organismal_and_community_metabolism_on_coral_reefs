@@ -211,7 +211,7 @@ EcoFunPlot <- (gpp + npp) / (rp + ncp) +
 EcoFunPlot
 
 
-# ggsave(here("Output","PaperFigures","Fig4_EcoFunction_3.11.png"), EcoFunPlot, device = "png", width = 8, height = 5)
+# ggsave(here("Output","PaperFigures","Figure4.png"), EcoFunPlot, device = "png", width = 8, height = 5)
 
 
 
@@ -241,5 +241,5 @@ EcoFunTable
 
 
 # EcoFunTable %>% 
-  # as_image(file = here("Output", "Thesis_Figures_Output", "EcoFunTable.png"))
+  # as_image(file = here("Output", "PaperFigures, "SuppTable3.png"))
 

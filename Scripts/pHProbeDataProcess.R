@@ -41,17 +41,17 @@ pHSlope<-pHcalib %>%
   right_join(.,pHData) %>% # join with the pH sample data
   mutate(mVTris = temp.orion*TTris + `(Intercept)`) %>% # calculate the mV of the tris at temperature in which the pH of samples were measured
   mutate(pH = pH(Ex=mV.orion,Etris=mVTris,S=sal.ysi,T=temp.orion)) %>% # calculate pH of the samples using the pH seacarb function
-  select(Date, Time, Site, Location,Day_Night, Tide, sal.ysi, TempInSitu, pH)
+  select(Date, Time, Location = Site, Treatment = Location,Day_Night, Tide, sal.ysi, TempInSitu, pH)
 
 
 #############################
 ### SAVE FILE
 #############################
 
-#write_csv(x = pHSlope, file = here("Data","pHProbe_Data_calculated.csv"))
+# write_csv(x = pHSlope, file = here("Data","pHProbe_Data_calculated.csv"))
 
 
-#############################
+############################
 ### SUMMARISE
 #############################
 

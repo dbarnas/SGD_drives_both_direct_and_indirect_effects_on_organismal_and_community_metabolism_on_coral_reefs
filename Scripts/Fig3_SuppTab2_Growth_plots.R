@@ -1,4 +1,4 @@
-#### Figure 3 & Supplemental Table 1: Mean percent change in weight with 
+#### Figure 3 & Supplemental Table 2: Mean percent change in weight with 
 ####            standard error and raw associated data points for species pairs 
 ####            in two SGD exposure treatments.
 #### Created by Danielle Barnas
@@ -152,13 +152,13 @@ wrap_elements(weightPatch.2) +
   )
 weightPatch.2
 
-# ggsave(here("Output","PaperFigures","Fig3_Weight_Change_long.png"), weightPatch.2, width = 8, height = 5)
+# ggsave(here("Output","PaperFigures","Figure3.png"), weightPatch.2, width = 8, height = 5)
 
 
 
 
 ##########################################################
-### Supplemental Table 1: Type III Analysis of Variance table displaying changes in 
+### Supplemental Table 2: Type III Analysis of Variance table displaying changes in 
 ### growth of species pairs in either high or low SGD exposure (ET).
 ##########################################################
 
@@ -274,6 +274,6 @@ GrowthTable <- fullmod %>%
 GrowthTable
 
 # GrowthTable %>%
-#   as_image(file = here("Output", "GrowthAnovaTable_biomnorm.png"))
+#   as_image(file = here("Output", "SuppTable2.png"))
 
 

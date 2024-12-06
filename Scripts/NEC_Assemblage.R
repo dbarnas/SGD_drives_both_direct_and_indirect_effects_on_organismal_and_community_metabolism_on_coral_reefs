@@ -260,7 +260,6 @@ EcoFunPlot <- (gpp + npp) / (rp + ncp) +
   # grid::textGrob('SGD Exposure Treatment')
 EcoFunPlot
 
-#ggsave(here("Output","PaperFigures","Fig4_EcoFunction.png"), EcoFunPlot, device = "png", width = 6, height = 6)
 
 #############################
 ### STATISTICAL TEST

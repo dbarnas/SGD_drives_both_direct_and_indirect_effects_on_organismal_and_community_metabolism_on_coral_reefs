@@ -21,7 +21,7 @@ library(patchwork)
 #############################
 ### READ IN DATA
 #############################
-meta <- read_csv(here("Data", "Full_Metadata.csv")) 
+meta <- read_csv(here("Data", "Site_Metadata.csv")) 
 
 
 

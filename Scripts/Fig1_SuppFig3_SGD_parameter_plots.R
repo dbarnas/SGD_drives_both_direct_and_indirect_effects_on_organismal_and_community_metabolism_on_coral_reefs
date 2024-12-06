@@ -247,7 +247,7 @@ Fig1plotCDE_axis_title <- wrap_elements(plot_spacer()) +
 
 
 ##########################################################
-### Supplemental Figure 2: Raw nutrient data from SGD experimental locations
+### Supplemental Figure 3: Raw nutrient data from SGD experimental locations
 ##########################################################
 
 #############################

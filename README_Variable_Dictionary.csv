@@ -1,0 +1,260 @@
+﻿File Name,Variable,Description
+CT_Calibration_Log,LoggerID,Unique logger identifier
+,treatment,"Low, High, or Seep; relative SGD at logger location"
+,date,Calibration date
+,pre_post,pre or post; time of calibration relative to deployment
+,time_in,Time of calibration start (24 hr)
+,time_out,Time of calibration end (24 hr)
+,cond_HL,H (high) or L (low); Logger conductivity range
+,cond_uS,"Conductivity (microsiemens, µS) at time of calibration"
+,EC_SC,EC (electrical conductivity) or SC (specific conductance); Reference value type at time of calibration
+,temp_HL,H (high) or L (low); Logger temperature calibration type
+,temp_C,Temperature (celcius) at time of calibration
+,sal_psu,Salinity (psu) at time of calibration
+,notes,relevant details
+Site_Metadata,Location,Identifier name for the experimental site
+,CowTagID,Sample locations at experimental site
+,lat,Latitude (degrees)
+,lon,Longitude (degrees)
+,dist_to_seep_m,Staight-line distance from the CowTagID to the known seepage point (meters)
+Launch_Log,Log_Type,CT (conductivity-temperature) or WL (water level); type of logger deployed at the experimental sites
+,Serial,Serial number uniquely identifying each logger
+,Treatment,Treatment location of each logger in situ
+,time_start,Date and Time (24 hr) the logger began recording in situ
+,time_end,Date and Time (24 hr) the logger stopped recording in situ
+,notes,relevant details
+Nutrients_experimental_sites,Sample_ID,"Identifier for each discrete water sample; treatment location, day or night sample, high or low tide, date, and time (24 hr) of each sample"
+,SLAB_ID,Unique identifier from the nutrient processing laboratory
+,Phosphate_umolL,Phosphate concentration (µmol per litre)
+,Silicate_umolL,Silicate concentration (µmol per litre)
+,NN_umolL,Nitrate plus nitrite concentration (µmol per litre)
+,Ammonia_umolL,Ammonia concentration (µmol per litre)
+pHProbe_Data_calculated,TrisCalDate,Date of pH probe calibration
+,Date,Date of pH sample
+,Time,Time (24 hr) of pH sample
+,Location,Identifier name for the experimental site
+,Treatment,Treatment location of each water sample
+,Day_Night,Day or Night; indicates whether sample occurred in the light or darkness
+,Tide,"High, Low, or Mid; tide at time of sampling"
+,sal.ysi,Salinity (psu) of water sample during pH measurement
+,TempInSitu,Temperature (celcius) of water sample during pH measurement
+,pH,total scale; calculated from mV and standardized to a tris sample
+Tris_Calibration_3_10_2023,TrisCalDate,Date of pH probe calibration
+,mVTris,mV recorded by the pH probe in a tris buffer solution
+,pH,pH (NBS scale) recorded by the pH probe in a tris buffer solution
+,TTris,Temperature (celcius) recorded by the pH probe in a tris buffer solution
+Water_Sample_rawTA,BottleID,Unique identifier from discrete water sampling at each experimental locaiton
+,run_block,WS; indicates measurement taken from a water sample
+,Day_Night,Day or Night; indicates whether sample occurred in the light or darkness
+,Tide,"High, Low, or Mid; tide at time of sampling"
+,DT,Simplifies Day/Night and Tide into one attribute
+,Location,Treatment location of each water sample
+,Date_ta,Date of water sample
+,Time_ta,Time (24 hr) of water sample
+,TA,Calculated total alkalinity (µmol/kg) of each water sample
+,Salinity,Salinity (psu) of water sample during TA measurement
+Water_Sampling,TrisCalDate,Date of pH probe calibration
+,Date,Date of water sample
+,Time,Time (24 hr) of water sample
+,Site,Identifier name for the experimental site
+,Location,Treatment location of each water sample
+,Day_Night,Day or Night; indicates whether sample occurred in the light or darkness
+,Tide,"High, Low, or Mid; tide at time of sampling"
+,mV.orion,mV  of each water sample recorded by the pH probe
+,temp.orion,Temperature (celcius) of each water sample recorded by the pH probe
+,sal.ysi,Salinity (psu)  of each water sample
+,econd.ysi,Electrical conductivity (µS)  of each water sample
+,temp.ysi,Temperature (celcius)  of each water sample recorded by the YSI
+,TempInSitu,Temperature (celcius) of each water sample recorded by a digital thermometer
+,notes,relevant details
+Species_Abundances_wide,CowTagID,Sample locations at prior experimental sites along SGD gradient
+,Turf:Caulerpa racemosa,Percent cover of benthic species at prior sites along the SGD gradient
+Species_Composition_2022,Location,Identifier name for the experimental site
+,CowTagID,Sample locations at prior experimental sites along SGD gradient
+,Date,Date of benthic composition survey
+,Taxa,Species or substrate present at each of 200 points within a 2x2meter quadrat
+,SpeciesCounts,Total counts of species presence across 200 points with a 2x2meter quadrat
+,PhotoNum,Reference photo identification number
+,Notes,relevant details
+Species_FE,Taxa,Lowest taxonomic unit identified
+,FE,"Functional entity comprised of phyla, morhphology, calcification strategy, and energetic resource strategy"
+All_Weight_pChange,SpeciesID,Unique organism identifier using taxon and two treatment IDs
+,DaysInSitu,Total days deployed per organism
+,Sp,Taxon abbreviation
+,SpRep,Paired organism identifiers
+,AT,HIGH or LOW; Assemblage treatment type
+,ET,HIGH or LOW; Environmental exposure treatment type
+,delWeight.g,Change in weight (g)
+,delWeight.g_biomnorm,Biomass-normalized change in weight (g)
+,pWeight,Percent change in weight
+,delWeight.mg_biomnorm_day,Biomass-normalized change in weight (mg)
+,delVolume.ml,Change in volume dispalcement (mL)
+,pVolume,Percent change in volume displacement
+,SA_cm2,Surface area (cm2)
+buoyant_weights,date,Date of buoyant weight measurement
+,pre_post,pre or post deployment measurement
+,AT,HIGH or LOW; Assemblage treatment type
+,ET,HIGH or LOW; Environmental exposure treatment type
+,SpeciesID,Unique organism identifier using taxon and two treatment IDs
+,BW.g,Buoyant weight measurement (g)
+,Temp.c,Temperature (celcius) at time of measurement
+,Salinity,Salinity (psu) at time of measurement
+,PhotoID,Reference photo identification number
+,Notes,relevant details
+,DIcal,Weight calibration ID in deionized water
+,SWcal,Weight calibration ID in seawater
+foil_SA_CCA,SpeciesID,Unique organism identifier using taxon and two treatment IDs
+,foil_weight,grams
+,CCA_SA,Calculated surface area based on standard curve
+,notes,standard curve equation
+foil_SA_curve,Dowel_ID,Unique identifier for each dowel
+,dowel_diam_cm,Diameter (cm) of dowel
+,diam_height_cm,Height (cm) of dowel
+,dowel_SA_cm2,Calculated surface area of dowel
+,aluminum_weight,Weight of aluminum wrapped around each dowel (g)
+Skeletal_Dry_Weight_Calc,date,Date of weight measurement
+,pre_post,"Time of measurement, pre- or post-deployment"
+,AT,HIGH or LOW; Assemblage treatment type
+,ET,HIGH or LOW; Environmental exposure treatment type
+,SpeciesID,Unique organism identifier using taxon and two treatment IDs
+,BW.g,Buoyant weight measurement (g)
+,Temp.c,Temperature (celcius) at time of BW measurement
+,Salinity,Salinity (psu) at time of BW measurement
+,sw_dens,Calculated density of seawater (g/cm3) during BW measurement
+,skel_dens,Skeletal density (g/cm3) of aragonite or calcite
+,dry_weight.g,Calculated dry weight (g)
+wax_dip_corals,Species,Coral species name
+,SpeciesID,Unique organism identifier using taxon and two treatment IDs
+,weight_noWax,Skeletal weight (g) without wax
+,weight_wWax,Skeletal weight (g) with wax
+,Wax_weight,Calculated wax weight (g)
+,species_SA_cm2,Calculated surface area based on standard curve
+,notes,standard curve equation
+wax_dip_curve,Dowel_ID,Unique identifier for each dowel
+,dowel_diam_cm,Diameter (cm) of dowel
+,diam_height_cm,Height (cm) of dowel
+,dowel_SA_cm2,Calculated surface area of dowel
+,dowel_weight_init,Dowel weight (g) without wax
+,dowel_weight_wWax,Dowel weight (g) with wax
+,wax_weight,Calculated wax weight (g)
+,notes,relevant details
+wet_weights_disp,date,Date of weight measurement
+,pre_post,"Time of measurement, pre- or post-deployment"
+,AT,HIGH or LOW; Assemblage treatment type
+,ET,HIGH or LOW; Environmental exposure treatment type
+,SpeciesID,Unique organism identifier using taxon and two treatment IDs
+,WW.g,Wet weight (g)
+,preVol,Volume before displacement (mL)
+,postVol,Volume after organism displacement (mL)
+,TopLength.cm,Upper length of Turbinaria ornata (cm)
+,TotalLength.cm,Total length of Turbinaria ornata (cm)
+,Notes,relevant details
+,Notes1,relevant details
+,Notes2,relevant details
+AFDW,SpeciesID,Unique organism identifier using taxon and two treatment IDs
+,Tin.g,Weight (g) of aluminum boat
+,DrywTin.g,Dry weight (g) of organism and aluminum boat
+,AFDWwTin.g,Ash-free dry weight (g) of organism biomass and aluminum boat
+,notes,relevant details
+All_EcoMet_Rates,SampleID,Unique assemblage identifier including  environmental treatment ID
+,AT,HIGH or LOW; Assemblage treatment type
+,ET,HIGH or LOW; Environmental exposure treatment type
+,P_R,"NC, NP, R, GP; Metabolic rate category"
+,Values,Respective metabolic rates
+AssemblageMetadata_calc,SampleID,Unique assemblage identifier including  environmental treatment ID
+,AT,HIGH or LOW; Assemblage treatment type
+,ET,HIGH or LOW; Environmental exposure treatment type
+,Volume.ml,Total volume (mL) displaced by assemblage
+,AFDW.g,Total AFDW (g) of assemblage
+CleanO2/,datetime,Date and Time (24 hr) of each measurement (1/second)
+,Date,Date of measurements
+,Time,Time (24 hr) of each measurement (1/second)
+,Channel,Unique assemblage identifier during each measurement period. Each channel corresponds to a specific oxygen and temperature probe for each run measurement period.
+,Value,Oxygen concentration within the chamber
+,O2_Unit...10,Units of oxygen concentrations
+,Temp,Temperature within the chamber
+,Temp_Unit,Units of temperature
+RawO2/,datetime,Date and Time (24 hr) of each measurement (1/second)
+,Date,Date of measurements
+,Time,Time (24 hr) of each measurement (1/second)
+,Channel,Unique assemblage identifier during each measurement period. Each channel corresponds to a specific oxygen and temperature probe for each run measurement period.
+,Value,Oxygen concentration within the chamber
+,O2_Unit...10,Units of oxygen concentrations
+,Temp,Temperature within the chamber
+,Temp_Unit,Units of temperature
+RawTA_2023,BottleID,Unique identifier for each respirometry water sample
+,run_block,Respirometry measurement block ID
+,chamber_channel,Chamber channel ID per run_block
+,Group,"Sample ID, indicating a pre-respirometry water sample or post-respirometry samples of blank chambers and assemblages"
+,SGD,low or high; Environmental exposure treatment
+,Date,Date of respirometry run
+,TA,Calculated total alkalinity (µmol/kg) of each water sample
+,Salinity,Salinity (psu) of each water sample
+,FileID,"Unique file identifier for each assemblage and environmental treatment, channel, and respirometry run"
+,Intercept,Calculated intercept of oxygen evolution slope
+,umol.L.sec,Calculated rate of oxygen evolution
+,Temp.C,Temperature (celcius) during the respirometry run
+Respo_RNormalized_AllRates,SampleID,Unique assemblage identifier including  environmental treatment ID
+,AT,HIGH or LOW; Assemblage treatment type
+,ET,HIGH or LOW; Environmental exposure treatment type
+,light_dark,LIGHT or DARK; indicates whether running allowing for photosynthesis or only respiration
+,P_R,"NP, R, GP; Metabolic rate category"
+,mmol.gram.hr,Respective metabolic rates (mmol O2 / g / hr corrected for blank chamber metabolic activity
+,mmol.gram.hr_uncorr,Respective metabolic rates (mmol O2 / g / hr without correcting for blank chamber metabolic activity
+,Temp.C,Temperature (celcius) during the respirometry run
+RespoMetadata,Date,Date of respirometry run
+,start_time,Start time of respirometry trun
+,stop_time,Stop time of respirometry trun
+,SampleID,Unique assemblage identifier including  environmental treatment ID
+,FileID,"Unique file identifier for each assemblage and environmental treatment, channel, and respirometry run"
+,run_block,Respirometry measurement block ID
+,AT,HIGH or LOW; Assemblage treatment type
+,ET,HIGH or LOW; Environmental exposure treatment type
+,chamber_channel,Chamber channel ID per run_block
+,BLANK,1 indicates channel did not include an assemblage. Measured background metabolic activity only
+,light_dark,LIGHT or DARK; indicates whether running allowing for photosynthesis or only respiration
+,Notes,relevant details
+,rerun?,Indicates whether an assemblage required an additional respirometry run due to problems in the initial run.
+,temp,Additional temperature check (celcius) prior to starting run
+RespoVolume,SampleID,Unique assemblage identifier including  environmental treatment ID
+,AT,HIGH or LOW; Assemblage treatment type
+,ET,HIGH or LOW; Environmental exposure treatment type
+,SpeciesID,Unique organism identifier using taxon and two treatment IDs
+,preVol,Volume before displacement (mL)
+,postVol,Volume after organism displacement (mL)
+,Respo,Indicates whether an organism was used in the respirometry assemblages
+,notes,"relevant details, new organism ID's as needed after deployment"
+SpeciesMetadata,SpeciesID,Unique organism identifier using taxon and two treatment IDs
+,FullSp,Taxon name
+,Sp,Taxon abbreviation
+,SpRep,Paired organism identifiers
+,AT,HIGH or LOW; Assemblage treatment type
+,ET,HIGH or LOW; Environmental exposure treatment type
+SpeciesMetadata_calculated_perday,SpeciesID,Unique organism identifier using taxon and two treatment IDs
+,DaysInSitu,Total days deployed per organism
+,Sp,Taxon abbreviation
+,SpRep,Paired organism identifiers
+,AT,HIGH or LOW; Assemblage treatment type
+,ET,HIGH or LOW; Environmental exposure treatment type
+,delWeight.g,Change in weight (g)
+,delWeight.g_biomnorm,Biomass-normalized change in weight (g)
+,pWeight,Percent change in weight
+,delWeight.mg_biomnorm_day,Time- and biomass-normalized change in weight (mg/day)
+,delTopLength.cm,Change in upper length of Turbinaria ornata (cm)
+,pLength,Percent change in length of Turbinaria ornata
+,delVolume.ml,Change in volume dispalcement (mL)
+,pVolume,Percent change in volume displacement
+,SA_cm2,Surface area (cm2)
+Full_CT_2023-09-11,date,Date and Time (24 hr) of each measurement (every 5 min)
+,LoggerID,Unique logger identifier
+,FullLoggerID,Unique logger identifier with treatment ID and file date
+,TempInSitu,Temperature (celcius) in situ
+,ECond.mS.cm,Electrical conductivity (µS)  in situ
+,Salinity_psu,Salinity (psu) in situ
+Cond/,"Date Time, GMT-10:00",Date and Time (24 hr) of each measurement (every 5 min)
+,"High Range, μS/cm",Uncalibrated Electrical conductivity (µS) in situ
+,"Temp, °C",Uncalibrated temperature (celcius) in situ
+Depth/,"Date Time, GMT-10:00",Date and Time (24 hr) of each measurement (every 5 min)
+,"Abs Pres, kPa",Absolute pressure (kPa) in situ
+,"Temp, °C",Temperature (celcius) in situ
+,"Water Level, meters",Depth (meters)

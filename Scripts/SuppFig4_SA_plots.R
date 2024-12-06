@@ -1,9 +1,9 @@
-#### Supplemental Figure 3: Surface area standard regression
+#### Supplemental Figure 4: Surface area standard regression
 #### Created by Danielle Barnas
 
 
 ##########################################################
-### Supplemental Figure 3
+### Supplemental Figure 4
 ##########################################################
 
 #############################
@@ -48,4 +48,4 @@ summary(lm(data = foilSA, aluminum_weight ~ dowel_SA_cm2))
 #############################
 ### SAVE PLOT
 #############################
-# ggsave(here("Output", "PaperFigures", "SuppFig3.png"), sa.plots, device = "png", height = 5, width = 8)
+# ggsave(here("Output", "PaperFigures", "SuppFig4.png"), sa.plots, device = "png", height = 5, width = 8)
